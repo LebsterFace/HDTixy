@@ -53,10 +53,6 @@ body {
     margin-top: 20px;
 }
 
-.red {
-    background-color: #ff000077!important;
-}
-
 span {
     white-space: pre;
 }
@@ -69,7 +65,7 @@ span {
     display: block;
     margin-bottom: 20px;
     color: #F24;
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 #original {

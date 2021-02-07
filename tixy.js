@@ -50,7 +50,6 @@ const canvasElement = document.getElementById("output"),
 	inputElement = document.getElementById("code");
 
 const useColors = document.getElementById("colors"),
-	useEager = document.getElementById("eager"),
 	useFPS = document.getElementById("fps"),
 	useTIXY = document.getElementById("tixy"),
 	useSpeed = document.getElementById("speed"),
@@ -96,16 +95,12 @@ useScale.oninput = _ => {
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
 };
 
-function setFunc(event = {code: "Enter"}) {
-	if (useEager.checked) {
-		if (inputElement.value === rawInput) return;
-	} else if (event.key !== "Enter") {
+function setFunc({force = false}) {
+	if (!force && inputElement.value === rawInput) {
 		return;
 	}
 
 	rawInput = inputElement.value;
-
-	if (!useEager.checked) flashRed();
 
 	try {
 		userFunc = eval(`(t,i,x,y)=>{try{return ${rawInput};}catch(e){return null;}}`);
@@ -118,11 +113,6 @@ function setFunc(event = {code: "Enter"}) {
 
 inputElement.addEventListener("keyup", setFunc);
 inputElement.addEventListener("keydown", setFunc);
-
-function flashRed() {
-	inputElement.classList.add("red");
-	setTimeout(() => inputElement.classList.remove("red"), 75);
-}
 
 function rgb(r, g, b) {
 	return r * 65536 + g * 256 + b;
@@ -158,13 +148,13 @@ function getPixel(t, i, x, y) {
 const lastFrameTimes = [];
 
 function render() {
-	// Calculate the miliseconds since the last frame started being rendered
+	// Calculate the milliseconds since the last frame started being rendered
 	const currentNow = performance.now(),
-		milisecondDiff = currentNow - previousNow;
+		millisecondDiff = currentNow - previousNow;
 	previousNow = currentNow;
 
-	//      miliseconds -> seconds               255x faster if not using tixyland
-	time += milisecondDiff / 1000 * speed * (useTIXY.checked ? 1 : 255);
+	//      milliseconds -> seconds               255x faster if not using tixyland
+	time += millisecondDiff / 1000 * speed * (useTIXY.checked ? 1 : 255);
 
 	ctx.clearRect(0, 0, width, height);
 	let i = -1;
@@ -210,7 +200,7 @@ function render() {
 	requestAnimationFrame(render);
 
 	if (lastFrameTimes.length === 15) lastFrameTimes.shift();
-	lastFrameTimes.push(milisecondDiff);
+	lastFrameTimes.push(millisecondDiff);
 
 	if (useFPS.checked) {
 		const fps = `${round(1000 / avg(lastFrameTimes))} FPS`;
