@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<!-- Website designed by Samuel Salinsky aka "Lebster" in 2021 -->
+<head>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>HD Tixy</title>
+</head>
+<body>
+    <div id="output-parent">
+        <canvas id="output" width="512" height="512"></canvas>
+    </div>
+    <div id="code-parent">
+        <label for="code">(t,i,x,y) =&gt;</label>
+        <input id="code" type="text" value="cos(t + i + x * y)" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off">
+        <div id="options">
+            <input id="tixy" type="radio" name="mode" checked>
+            <label for="tixy">tixy</label>
+            <input id="colors" type="radio" name="mode">
+            <label for="colors">Color</label>
+            <input id="vanilla" type="radio" name="mode">
+            <label for="vanilla">Grayscale</label>
+            <br>
+            <br>
+            <input id="eager" checked type="checkbox">
+            <label for="eager">Eager Evaluation</label>
+            <input id="fps" type="checkbox">
+            <label for="fps">Show FPS</label>
+            <input id="circles" type="checkbox" checked>
+            <label for="circles">Use Circles</label>
+            <br>
+            <br>
+            <input id="speed" min="0" max="1000" value="500" type="range">
+            <label for="speed"><span id="currentSpeed"> 1.00</span>x Speed</label>
+            <input id="scale" min="8" max="32" value="32" type="range">
+            <label for="scale"><span id="currentScale">32</span>x Scale</label>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
