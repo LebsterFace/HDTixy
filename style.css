@@ -21,7 +21,7 @@ body {
 }
 
 #output-parent {
-    flex: 5;
+    flex: 27;
 }
 
 #output {
@@ -34,7 +34,7 @@ body {
 }
 
 #code-parent {
-    flex: 2;
+    flex: 13;
     text-align: center;
 }
 
@@ -43,14 +43,14 @@ body {
     border: none;
     outline: none;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 7px;
     width: 720px;
     border-radius: 5px;
     background: #0a0a0a;
 }
 
 #options {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .red {
@@ -63,4 +63,27 @@ span {
 
 #speed {
     width: 300px;
+}
+
+#comment {
+    display: block;
+    margin-bottom: 20px;
+    color: #F24;
+    white-space: pre-line;
+}
+
+#original {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+}
+
+#original a {
+    font-size: inherit;
+    color: dodgerblue;
+}
+
+#original a:visited {
+    color: #808;
 }
