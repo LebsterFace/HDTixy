@@ -1,4 +1,4 @@
-const tutorialElement = document.getElementById("comment");
+const commentElement = document.getElementById("comment");
 
 class Example {
     constructor(description, code, custom = null) {
@@ -17,7 +17,7 @@ class Example {
     }
 
     activate() {
-        tutorialElement.innerText = this.description;
+        commentElement.innerText = this.description;
         inputElement.value = this.code;
         setFunc({force: true});
         if (this.custom) this.custom();
@@ -38,5 +38,5 @@ const examples = [
     new Example("the hsl function can be\nused for smooth transitions", "hsl(t, 100, 50)", () => {useSpeed.value = 125;useSpeed.oninput();}),
     new Example("disable circles for\nan alternative look", "[0xFF0000, 0, 0x0000FF][i%3]", () => {useCircles.checked = false;}),
     new Example("use the scale slider\nto zoom in or out", "x * y + t", () => {useScale.value = 8;useScale.oninput();}),
-    new Example("you can omit 'Math.' when\nyou're using math functions", "hsl(6*(y-sin((x + t)/4)), 100, 50)"),
+    new Example("you can omit 'Math.' when\nyou're using math functions", "hsl(6*(y-sin((x + t)/4)), 100, 50)")
 ];
