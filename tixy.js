@@ -151,8 +151,8 @@ function render() {
 		millisecondDiff = currentNow - previousNow;
 	previousNow = currentNow;
 
-	//      milliseconds -> seconds               255x faster if not using tixyland
-	time += millisecondDiff / 1000 * speed * (useTIXY.checked ? 1 : 255);
+	//      milliseconds -> seconds
+	time += millisecondDiff / 1000 * speed;
 
 	ctx.clearRect(0, 0, width, height);
 	let i = -1;
