@@ -152,7 +152,7 @@ function render() {
 	previousNow = currentNow;
 
 	//      milliseconds -> seconds
-	time += millisecondDiff / 1000 * speed;
+	time += millisecondDiff / 1000 * speed * (useColors.checked ? 255 : 1);
 
 	ctx.clearRect(0, 0, width, height);
 	let i = -1;
