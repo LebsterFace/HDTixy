@@ -50,8 +50,9 @@ const canvasElement = document.getElementById("output"),
 	inputElement = document.getElementById("code");
 
 const useColors = document.getElementById("colors"),
-	useFPS = document.getElementById("fps"),
+	useGrey = document.getElementById("grey"),
 	useTIXY = document.getElementById("tixy"),
+	useFPS = document.getElementById("fps"),
 	useSpeed = document.getElementById("speed"),
 	useScale = document.getElementById("scale"),
 	useCircles = document.getElementById("circles");
@@ -95,8 +96,8 @@ useScale.oninput = _ => {
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
 };
 
-function setFunc({force = false}) {
-	if (!force && inputElement.value === rawInput) {
+function setFunc(obj = {force: false}) {
+	if (!obj.force && inputElement.value === rawInput) {
 		return;
 	}
 
@@ -110,9 +111,6 @@ function setFunc({force = false}) {
 
 	time = 0;
 }
-
-inputElement.addEventListener("keyup", setFunc);
-inputElement.addEventListener("keydown", setFunc);
 
 function rgb(r, g, b) {
 	return r * 65536 + g * 256 + b;
