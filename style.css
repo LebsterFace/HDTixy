@@ -1,6 +1,9 @@
 html, body {
     width: 100%;
     height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
 * {
@@ -13,29 +16,30 @@ html, body {
 
 body {
     background-color: black;
-}
-
-body {
     display: flex;
     flex-direction: column;
 }
 
 #output-parent {
-    flex: 27;
-}
-
-#output {
-    width: 512px;
-    height: 512px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin: -256px 0 0 -256px;
+    flex: 2;
+    display: grid;
+    place-items: center;
 }
 
 #code-parent {
-    flex: 13;
+    flex: 1;
     text-align: center;
+}
+
+@media only screen and (max-width: 572px) {
+    #output {
+        width: 100%;
+    }
+}
+
+#output {
+    box-sizing: border-box;
+    padding: 30px;
 }
 
 #code {
@@ -47,6 +51,7 @@ body {
     width: 720px;
     border-radius: 5px;
     background: #0a0a0a;
+    
 }
 
 #options {
