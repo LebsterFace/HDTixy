@@ -1,50 +1,3 @@
-//#region Math
-// I don't want to use with(Math)
-
-const abs = Math.abs,
-	acos = Math.acos,
-	acosh = Math.acosh,
-	asin = Math.asin,
-	asinh = Math.asinh,
-	atan = Math.atan,
-	atan2 = Math.atan2,
-	atanh = Math.atanh,
-	cbrt = Math.cbrt,
-	ceil = Math.ceil,
-	clz32 = Math.clz32,
-	cos = Math.cos,
-	cosh = Math.cosh,
-	exp = Math.exp,
-	expm1 = Math.expm1,
-	floor = Math.floor,
-	fround = Math.fround,
-	hypot = Math.hypot,
-	imul = Math.imul,
-	log = Math.log,
-	log1p = Math.log1p,
-	log2 = Math.log2,
-	log10 = Math.log10,
-	max = Math.max,
-	min = Math.min,
-	pow = Math.pow,
-	random = Math.random,
-	round = Math.round,
-	sign = Math.sign,
-	sin = Math.sin,
-	sinh = Math.sinh,
-	sqrt = Math.sqrt,
-	tan = Math.tan,
-	tanh = Math.tanh,
-	trunc = Math.trunc,
-	E = Math.E,
-	LN2 = Math.LN2,
-	LN10 = Math.LN10,
-	LOG2E = Math.LOG2E,
-	LOG10E = Math.LOG10E,
-	PI = Math.PI,
-	SQRT1_2 = Math.SQRT1_2,
-	SQRT2 = Math.SQRT2;
-//#endregion
 //#region Setup
 const canvasElement = document.getElementById("output"),
 	inputElement = document.getElementById("code");
@@ -79,15 +32,15 @@ ctx.textBaseline = "top";
 //#region Functions
 
 function logScale(x, minV, maxV, maxP) {
-	const minv = log(minV),
-		maxv = log(maxV),
+	const minv = Math.log(minV),
+		maxv = Math.log(maxV),
 		scale = (maxv - minv) / maxP;
-	return exp(minv + scale * x);
+	return Math.exp(minv + scale * x);
 }
 
 useSpeed.oninput = _ => {
 	speed = logScale(parseFloat(useSpeed.value), 0.1, 10, 1000);
-	speed = round(speed * 100) / 100;
+	speed = Math.round(speed * 100) / 100;
 	speedDisplay.innerText = speed.toFixed(2).toString().padStart(5, " ");
 };
 
@@ -97,14 +50,12 @@ useScale.oninput = _ => {
 };
 
 function setFunc(obj = {force: false}) {
-	if (!obj.force && inputElement.value === rawInput) {
-		return;
-	}
+	if (!obj.force && inputElement.value === rawInput) return;
 
 	rawInput = inputElement.value;
 
 	try {
-		userFunc = eval(`(t,i,x,y)=>{try{return ${rawInput};}catch(e){return null;}}`);
+		userFunc = new Function("t", "i", "x", "y", `try{with(Math){return ${rawInput};}}catch (e){return null;}`);
 	} catch (e) {
 		userFunc = () => 0;
 	}
@@ -162,16 +113,16 @@ function render() {
 			i++;
 
 			const rawValue = getPixel(time, i, x / scale, y / scale),
-				pixelColor = abs(max(min(round(parseFloat(rawValue)), 4294967295), -4294967295));
+				pixelColor = Math.abs(Math.max(Math.min(Math.round(parseFloat(rawValue)), 4294967295), -4294967295));
 
 			if (useTIXY.checked) {
 				// tixy.land mode
-				const tixyColor = max(-1, min(1, rawValue));
+				const tixyColor = Math.max(-1, Math.min(1, rawValue));
 				if (useCircles.checked) {
 					// Circles don't fade
 					ctx.fillStyle = tixyColor < 0 ? `#F24` : `#FFF`;
 					ctx.beginPath();
-					ctx.arc(x + scale / 2, y + scale / 2, abs(tixyColor) * (scale / 2), 0, 2 * Math.PI);
+					ctx.arc(x + scale / 2, y + scale / 2, Math.abs(tixyColor) * (scale / 2), 0, 2 * Math.PI);
 					ctx.fill();
 					continue;
 				}
@@ -201,7 +152,7 @@ function render() {
 	lastFrameTimes.push(millisecondDiff);
 
 	if (useFPS.checked) {
-		const fps = `${round(1000 / avg(lastFrameTimes))} FPS`;
+		const fps = `${Math.round(1000 / avg(lastFrameTimes))} FPS`;
 		ctx.fillStyle = "white";
 		ctx.strokeText(fps, 10, 10);
 		ctx.fillText(fps, 10, 10);
