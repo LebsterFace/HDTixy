@@ -49,13 +49,13 @@ useScale.oninput = _ => {
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
 };
 
+const MathDestructure = `const {${Object.getOwnPropertyNames(Math).join(",")}} = Math`;
 function setFunc(obj = {force: false}) {
 	if (!obj.force && inputElement.value === rawInput) return;
-
 	rawInput = inputElement.value;
 
 	try {
-		userFunc = new Function("t", "i", "x", "y", `try{with(Math){return ${rawInput};}}catch (e){return null;}`);
+		userFunc = new Function("t", "i", "x", "y", `${MathDestructure};try{return ${rawInput};}catch (e){return null;}`);
 	} catch (e) {
 		userFunc = () => 0;
 	}
