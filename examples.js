@@ -60,11 +60,12 @@ const examples = [
 	new Example("positive numbers are white,\nnegatives are red", "x - 8"),
 	new Example("use the time to\nanimate the dots", "y - t"),
 	new Example("and use the speed slider\nto change the speed", "y - t", {speed: 1000}),
+	new Example("or multiply `t` to go even faster", "i - t * 10", {speed: 1000}),
 	new Example("return a hexadecimal color\nwhen in color mode", "0x4034EB", {mode: "1"}),
 	new Example("or use the rgb function", "rgb(x*16, y*16, 0)"),
-	new Example("the hsl function can be\nused for smooth transitions", "hsl(t, 100, 50)", {speed: 125}),
+	new Example("the hsl function can be\nused for smooth transitions", "hsl(t * 8, 100, 50)", {speed: 1000}),
 	new Example("disable circles for\nan alternative look", "[0xFF0000, 0, 0x0000FF][i%3]", {circles: "0"}),
-	new Example("use the scale slider\nto zoom in or out", "x * y + t", {scale: 8}),
-	new Example("you can omit 'Math.' when\nyou're using math functions", "hsl(6*(y-sin((x + t)/4)), 100, 50)"),
+	new Example("use the scale slider\nto zoom in or out", "x * y + t*50", {scale: 8}),
+	new Example("you can omit 'Math.' when\nyou're using math functions", "hsl(6*(y-sin((x + t * 7)/4)), 100, 50)"),
     new Example("Have Fun!", "", {mode: "2", scale: 32, speed: 500, circles: "1"})
 ];
