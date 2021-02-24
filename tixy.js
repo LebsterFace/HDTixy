@@ -69,11 +69,11 @@ function rgb(r, g, b) {
 
 function hsl(h, s, l) {
 	l /= 100;
-	const a = s * min(l, 1 - l) / 100;
+	const a = s * Math.min(l, 1 - l) / 100;
 	const f = n => {
 		const k = (n + h / 30) % 12;
-		const color = l - a * max(min(k - 3, 9 - k, 1), -1);
-		return round(255 * color);
+		const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+		return Math.round(255 * color);
 	};
 
 	return rgb(f(0), f(8), f(4));
