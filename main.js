@@ -8,7 +8,7 @@ function nextExample() {
 function input(e) {
 	commentElement.innerText = "// Press 'enter' to save in URL or\n" + "// click on the dots for more info";
 	
-	if (e.code === "Enter") {
+	if (e.key === "Enter") {
 		e.preventDefault();
 		const saveURL = new URL(window.location);
 		saveURL.searchParams.delete("c");
@@ -21,6 +21,10 @@ function input(e) {
 		if (!useCircles.checked) 	  saveURL.searchParams.set("r", "0");
 		if (useScale.value !== "32")  saveURL.searchParams.set("z", useScale.value);
 		if (useSpeed.value !== "500") saveURL.searchParams.set("s", useSpeed.value);
+
+		inputElement.focus();
+		inputElement.setSelectionRange(0, inputElement.value.length);
+		document.execCommand("copy");
 		
 		history.replaceState(null, inputElement.value, saveURL);
 		return false;
