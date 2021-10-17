@@ -28,29 +28,31 @@ ctx.imageSmoothingEnabled = false;
 ctx.strokeStyle = "black";
 ctx.lineWidth = 2;
 ctx.textBaseline = "top";
+
 //#endregion
 //#region Functions
 
-function logScale(x, minV, maxV, maxP) {
+const logScale = (x, minV, maxV, maxP) => {
 	const minv = Math.log(minV),
 		maxv = Math.log(maxV),
 		scale = (maxv - minv) / maxP;
 	return Math.exp(minv + scale * x);
-}
+};
 
-useSpeed.oninput = _ => {
+useSpeed.addEventListener("input", _ => {
 	speed = logScale(parseFloat(useSpeed.value), 0.1, 10, 1000);
 	speed = Math.round(speed * 100) / 100;
 	speedDisplay.innerText = speed.toFixed(2).toString().padStart(5, " ");
-};
+});
 
-useScale.oninput = _ => {
+useScale.addEventListener("input", _ => {
 	scale = parseInt(useScale.value);
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
-};
+});
 
 const MathDestructure = `const {${Object.getOwnPropertyNames(Math).join(",")}} = Math`;
-function setFunc(obj = {force: false}) {
+
+const setFunc = (obj = {force: false}) => {
 	if (!obj.force && inputElement.value === rawInput) return;
 	rawInput = inputElement.value;
 
@@ -61,13 +63,11 @@ function setFunc(obj = {force: false}) {
 	}
 
 	time = 0;
-}
+};
 
-function rgb(r, g, b) {
-	return r * 65536 + g * 256 + b;
-}
+const rgb = (r, g, b) => (r << 16) | (g << 8) | b;
 
-function hsl(h, s, l) {
+const hsl = (h, s, l) => {
 	l /= 100;
 	const a = s * Math.min(l, 1 - l) / 100;
 	const f = n => {
@@ -77,26 +77,27 @@ function hsl(h, s, l) {
 	};
 
 	return rgb(f(0), f(8), f(4));
-}
+};
 
-function avg(array) {
+const avg = array => {
 	let result = 0;
 	for (let i = 0; i < array.length; i++) result += array[i];
 	return result / array.length;
-}
+};
 
-function getPixel(t, i, x, y) {
+const getPixel = (t, i, x, y) => {
 	try {
 		return userFunc(t, i, x, y) || 0;
 	} catch (e) {
 		return 0; // null on error?
 	}
-}
+};
+
 //#endregion
 //#region Render
 const lastFrameTimes = [];
 
-function render() {
+const render = () => {
 	// Calculate the milliseconds since the last frame started being rendered
 	const currentNow = performance.now(),
 		millisecondDiff = currentNow - previousNow;
@@ -157,7 +158,8 @@ function render() {
 		ctx.strokeText(fps, 10, 10);
 		ctx.fillText(fps, 10, 10);
 	}
-}
+};
+
 //#endregion
 
 render();
