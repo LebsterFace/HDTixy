@@ -51,7 +51,7 @@ const setScale = () => {
 };
 
 useSpeed.addEventListener("input", setSpeed, {passive: true});
-useScale.addEventListener("input", useScale, {passive: true});
+useScale.addEventListener("input", setScale, {passive: true});
 
 const MathDestructure = `const {${Object.getOwnPropertyNames(Math).join(",")}} = Math`;
 
