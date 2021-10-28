@@ -39,16 +39,19 @@ const logScale = (x, minV, maxV, maxP) => {
 	return Math.exp(minv + scale * x);
 };
 
-useSpeed.addEventListener("input", _ => {
+const setSpeed = () => {
 	speed = logScale(parseFloat(useSpeed.value), 0.1, 10, 1000);
 	speed = Math.round(speed * 100) / 100;
 	speedDisplay.innerText = speed.toFixed(2).toString().padStart(5, " ");
-});
+};
 
-useScale.addEventListener("input", _ => {
+const setScale = () => {
 	scale = parseInt(useScale.value);
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
-});
+};
+
+useSpeed.addEventListener("input", setSpeed, {passive: true});
+useScale.addEventListener("input", useScale, {passive: true});
 
 const MathDestructure = `const {${Object.getOwnPropertyNames(Math).join(",")}} = Math`;
 

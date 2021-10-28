@@ -33,12 +33,12 @@ class Example {
 
 		if (this.scale !== null) {
 			useScale.value = this.scale;
-			useScale.oninput();
+			setScale();
 		}
 
 		if (this.speed !== null) {
 			useSpeed.value = this.speed;
-			useSpeed.oninput();
+			setSpeed();
 		}
 
         if (this.circles !== null) {
