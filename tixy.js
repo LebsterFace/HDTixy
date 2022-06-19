@@ -14,7 +14,7 @@ const scaleDisplay = document.getElementById("currentScale"),
 	speedDisplay = document.getElementById("currentSpeed");
 
 const ctx = canvasElement.getContext("2d"),
-	{width, height} = canvasElement;
+	{ width, height } = canvasElement;
 
 let speed = 1,
 	scale = 32,
@@ -50,12 +50,12 @@ const setScale = () => {
 	scaleDisplay.innerText = useScale.value.padStart(2, " ");
 };
 
-useSpeed.addEventListener("input", setSpeed, {passive: true});
-useScale.addEventListener("input", setScale, {passive: true});
+useSpeed.addEventListener("input", setSpeed, { passive: true });
+useScale.addEventListener("input", setScale, { passive: true });
 
 const MathDestructure = `const {${Object.getOwnPropertyNames(Math).join(",")}} = Math`;
 
-const setFunc = (obj = {force: false}) => {
+const setFunc = (obj = { force: false }) => {
 	if (!obj.force && inputElement.value === rawInput) return;
 	rawInput = inputElement.value;
 
